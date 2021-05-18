@@ -1,0 +1,143 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+        {% include directory ~ '/templates/page/parts/preloader.html.twig' %}
+
+ *
+ * @ingroup themeable
+ */
+#}
+
+
+<article{{ attributes.addClass(classes) }}>
+  <div class="team-single-page user-page">
+    <div class="col-sm-12 user-information">
+
+                                 {{ render_block('views_block__user_information_block_1') }}
+    </div>
+    <div class="col-sm-12">
+    	<div class="col-xs-3">
+        	<ul class="nav nav-tabs tabs-left sideways">
+		       <li class='active'>
+                		<a data-toggle='tab' href='#contact-info'>
+                    			<div class='side_tab'>
+                        			<div class='tab-img'><img src="{{ base_path }}/sites/default/files/profile/contact.png" /></div>
+                    			</div>
+                    			<div class='side-tab-content'>
+                        			<p class='admin-name'>{{ 'Contact Information'|t }}</p>
+                    			</div>
+                		</a>
+       			</li>
+
+                       <li class=''>
+                                <a data-toggle='tab' href='#education'>
+                                        <div class='side_tab'>
+                                                <div class='tab-img'><img src='{{ base_path }}/sites/default/files/profile/education.png' /></div>
+                                        </div>
+                                        <div class='side-tab-content'>
+                                                <p class='admin-name'>{{ 'Education'|t }}</p>
+                                        </div>
+                                </a>
+                        </li>
+                      <li class=''>
+                                <a data-toggle='tab' href='#academic'>
+                                        <div class='side_tab'>
+                                                <div class='tab-img'><img src='{{ base_path }}/sites/default/files/profile/academic.png' /></div>
+                                        </div>
+                                        <div class='side-tab-content'>
+                                                <p class='admin-name'>{{ 'Academic Positions'|t }}</p>
+                                        </div>
+                                </a>
+                        </li>
+
+                      <li class=''>
+                                <a data-toggle='tab' href='#positions'>
+                                        <div class='side_tab'>
+                                                <div class='tab-img'><img src='{{ base_path }}/sites/default/files/profile/administrative.png' /></div>
+                                        </div>
+                                        <div class='side-tab-content'>
+                                                <p class='admin-name'>{{ 'Administrative Positions'|t }}</p>
+                                        </div>
+                                </a>
+                        </li>
+
+                      <li class=''>
+                                <a data-toggle='tab' href='#publications'>
+                                        <div class='side_tab'>
+                                                <div class='tab-img'><img src='{{ base_path }}/sites/default/files/profile/publications.png' /></div>
+                                        </div>
+                                        <div class='side-tab-content'>
+                                                <p class='admin-name'>{{ 'Publications'|t }}</p>
+                                        </div>
+                                </a>
+                        </li>
+                      <li class=''>
+                                <a data-toggle='tab' href='#supervisions'>
+                                        <div class='side_tab'>
+                                                <div class='tab-img'><img src='{{ base_path }}/sites/default/files/profile/supervisions.png' /></div>
+                                        </div>
+                                        <div class='side-tab-content'>
+                                                <p class='admin-name'>{{ 'Supervisions'|t }}</p>
+                                        </div>
+                                </a>
+                        </li>
+                      <li class=''>
+                                <a data-toggle='tab' href='#awards'>
+                                        <div class='side_tab'>
+                                                <div class='tab-img'><img src='{{ base_path }}/sites/default/files/profile/awards.png' /></div>
+                                        </div>
+                                        <div class='side-tab-content'>
+                                                <p class='admin-name'>{{ 'Awards'|t }}</p>
+                                        </div>
+                                </a>
+                        </li>
+
+	        </ul>
+	</div>
+	<div class="col-xs-9">
+        	<div class="tab-content">
+           		<div class='tab-pane active' id='contact-info'>
+				 {{ render_block('views_block__staff_contact_info_block_1') }}
+	           	</div>            
+                        <div class='tab-pane scroll-text' id='education'>
+				 {{ render_block('views_block__user_education_block_1') }}
+                        </div>
+                        <div class='tab-pane scroll-text' id='academic'>
+				 {{ render_block('views_block__academic_positions_block_1') }}
+                        </div>
+                        <div class='tab-pane scroll-text' id='positions'>
+				 {{ render_block('views_block__administrative_positions_block_1') }}
+                        </div>
+                        <div class='tab-pane scroll-text' id='publications'>
+				 {{ render_block('views_block__recent_researches_block_2') }}
+                        </div>
+                        <div class='tab-pane scroll-text' id='supervisions'>
+				 {{ render_block('views_block__supervisions_block_1') }}
+                        </div>
+                        <div class='tab-pane scroll-text' id='awards'>
+				 {{ render_block('views_block__related_awards_block_2') }}
+                        </div>
+
+
+        	</div>
+    	</div>
+    </div>
+    
+
+  </div>
+</article>
+
+

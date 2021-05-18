@@ -1,0 +1,75 @@
+<?php
+
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Component\Utility\UrlHelper;
+use Drupal\node\Entity\Node;
+use Drupal\Core\Url;
+use Drupal\Core\Language\LanguageInterface;
+
+
+function aun_system_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $user = \Drupal::currentUser();
+  $uid = \Drupal::currentUser()->id();
+  $user_account = \Drupal\user\Entity\User::load("$uid"); // pass your uid
+  $roles = $user->getRoles();
+  if(!(in_array('administrator', $roles))){
+//print_r($form_state);exit();
+//     $form['group_settings']['#access'] = FALSE;
+  }
+//print $form_id;exit();
+  if($form_id == 'node_student_form'){
+    $form['#title'] = t('ﺎﺿﺎﻓﺓ ﻁﺎﻠﺑ');
+    $form['title']['#value'] = t('ﺎﺿﺎﻓﺓ ﻁﺎﻠﺑ');
+    $form['title']['#value'] = '12345';
+    $form['field_student_number']['widget'][0]['value']['#default_value'] = '112'; // for textfield.
+    $form['field_student_number']['widget'][0]['value']['#required'] = 1;
+    //$form['field_student_number']['#access'] = FALSE;
+  }
+
+  if($form_id =='node_awards_form'){
+    if(in_array('faculty_staff', $roles)){
+      $form['field_awards_member']['widget'][0]['target_id']['#default_value'] = $user_account; // for textfield.
+    }
+  }
+  if($form_id =='node_research_form'){
+    if(in_array('faculty_staff', $roles)){
+      $form['field_research_user']['widget'][0]['target_id']['#default_value'] = $user_account; // for textfield.
+    }
+  }
+
+  if($form_id == 'user_form'){
+    if(!(in_array('administrator', $roles))){
+      $form['field_old_member_id']['#access'] = FALSE;
+      $form['field_faculty_management']['#access'] = FALSE;
+      $form['field_user_type']['#access'] = FALSE;
+    }
+  }
+
+}
+
+function _return_category_value(){
+  $sql = "SELECT node.nid FROM node_field_data node WHERE node.type ='student'";
+  //print $sql;exit();
+  $database = \Drupal::database();
+  $result = $database->query($sql);
+  $i =1;
+  while ($row_data = $result->fetchAssoc()) {
+    $student_nid = $row_data['nid'];
+  }
+
+}
+
+
+function _return_current_lang(){
+ return $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+}
+
+//print _return_current_lang();
+function aun_system_get_language() {
+  $referer_part_list = explode('/', $_SERVER['HTTP_REFERER']);
+
+  return $referer_part_list[3];
+}
+?>
